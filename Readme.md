@@ -1,5 +1,5 @@
 1. Create docker for mongo ports in vm1 and vm2 as given in directory here vm1 is primary
-2. Generate keyauth file
+2. Generate keyauth file /n
     2.1 openssl rand -base64 756 > keyauth
     2.2 sudo chmod 400 keyauth
     2.3 sudo chown 999:999 keyauth
