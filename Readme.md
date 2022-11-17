@@ -15,29 +15,42 @@
     
     docker file :
     
-    {
-    
     version: "3.8"
+    
     services:
+      
       mongo1:
+      
       image: mongo:4.0.4
+      
       container_name: mongo1
+      
       environment:
-       - MONGO_DATA_DIR=/data/db
-       - MONGO_LOG_DIR=/dev/null
-       - MONGO_INITDB_ROOT_USERNAME=admin
-       - MONGO_INITDB_ROOT_PASSWORD=admin
-      #extra_hosts:
-      #- "mongo2:"<IP of vm2>"
-      volumes:
-        - ./data/dbdata:/data/db
-        - ./keyauth:/data/keyauth
-      #command: mongod --port 27017 --keyFile /data/keyauth --dbpath /data/db --replSet rs0 --bind_ip 0.0.0.0
-      command: mongod  --port 27017 --bind_ip 0.0.0.0
-      network_mode: host
-
-       }
        
+       - MONGO_DATA_DIR=/data/db
+       
+       - MONGO_LOG_DIR=/dev/null
+       
+       - MONGO_INITDB_ROOT_USERNAME=admin
+       
+       - MONGO_INITDB_ROOT_PASSWORD=admin
+      
+      #extra_hosts:
+      
+      #- "mongo2:"<IP of vm2>"
+      
+      volumes:
+      
+      - ./data/dbdata:/data/db
+      
+      - ./keyauth:/data/keyauth
+      
+      #command: mongod --port 27017 --keyFile /data/keyauth --dbpath /data/db --replSet rs0 --bind_ip 0.0.0.0
+      
+      command: mongod  --port 27017 --bind_ip 0.0.0.0
+      
+      network_mode: host
+      
     5.1 It will create the data directory and will save the user name and password in env
     
     5.2 make the docker down in vm1
@@ -47,37 +60,67 @@
     docker file :
 
     version: "3.8"
+    
     services:
+      
       mongo1:
+      
       image: mongo:4.0.4
+      
       container_name: mongo1
+      
       <!-- environment:
+       
        - MONGO_DATA_DIR=/data/db
+       
        - MONGO_LOG_DIR=/dev/null
+        
        - MONGO_INITDB_ROOT_USERNAME=admin
+       
        - MONGO_INITDB_ROOT_PASSWORD=admin -->
+      
       #extra_hosts:
+      
       #- "mongo2:"<IP of vm2>"
+      
       volumes:
+       
         - ./data/dbdata:/data/db
+        
         - ./keyauth:/data/keyauth
+      
       command: mongod --port 27017 --keyFile /data/keyauth --dbpath /data/db --replSet rs0 --bind_ip 0.0.0.0
+      
       <!-- command: mongod  --port 27017 --bind_ip 0.0.0.0 -->
+      
       network_mode: host
 
 6. Make the docker up in vm2
+    
     docker file:
+    
     version: "3"
+    
     services:
+      
       mongo2:
+      
       image: mongo:4.0.4
+      
       container_name: mongo2
+      
       volumes:
+        
         - ./data/dbdata:/data/db
+        
         - ./keyauth:/data/keyauth
+     
      #extra_hosts:
+       
        #- "mongo1:"<IP of vm1>"
+      
       command: mongod --port 37017 --keyFile /data/keyauth --dbpath /data/db --replSet rs0 --bind_ip 0.0.0.0
+      
       network_mode: host 
     
     6.1 If any Issue comes remove the created data directory
