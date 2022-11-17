@@ -40,10 +40,10 @@
       #- "mongo2:"<IP of vm2>"
       
       volumes:
+        
+        - ./data/dbdata:/data/db
       
-      - ./data/dbdata:/data/db
-      
-      - ./keyauth:/data/keyauth
+        - ./keyauth:/data/keyauth
       
       #command: mongod --port 27017 --keyFile /data/keyauth --dbpath /data/db --replSet rs0 --bind_ip 0.0.0.0
       
@@ -132,20 +132,25 @@
 7. After making docker up in vm2 check if port connection is there in both vms using telnet/mongosh/mongo (port connectivity is must needed)
     
     7.1 To check telnet connectivity in both vm
+        
         a.In vm1 terminal
             telnet <Ip of vm2>  <port of vm2>
+        
         b.In vm2 terminal
             telnet <Ip of vm1>  <port of vm1>
         OR
     
     7.2 To check mongo connectivity in both vm
+        
         a.In vm1 terminal
             mongo --host <Ip of vm2> --port <port of vm2>
+        
         b.In vm2 terminal
             mongo --host <Ip of vm1> --port <port of vm1>
         OR
     
     7.2 To check mongosh connectivity in both vm
+        
         a.In vm1 terminal
             mongosh --host <Ip of vm2> --port <port of vm2>
         
@@ -205,6 +210,7 @@
         h. You can use the appuser and password to login from other nodes
 
 9. How to login from other nodes
+    
     9.1. Bash into primary node container
             docker exec -it mongo1 bash
     
