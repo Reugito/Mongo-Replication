@@ -12,8 +12,11 @@
 4. Give same mount path as given in two config files or else it will generate issues
 
 5. Make docker up in vm1 
+    
     docker file :
-
+    
+    {
+    
     version: "3.8"
     services:
       mongo1:
@@ -33,7 +36,8 @@
       command: mongod  --port 27017 --bind_ip 0.0.0.0
       network_mode: host
 
-
+       }
+       
     5.1 It will create the data directory and will save the user name and password in env
     
     5.2 make the docker down in vm1
