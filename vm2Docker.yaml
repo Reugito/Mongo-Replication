@@ -1,0 +1,21 @@
+version: "2"
+services:
+  mongo.com:
+    image: mongo:4.0.10
+    container_name: mongo1
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    extra_hosts:
+      - "mongo2:20.204.15.236"
+#    ports:
+ #     - 8017:27017
+#    command: mongod --smallfiles --logpath=/dev/null
+    volumes:
+      - ./docker_data/data.mongo.com/db:/data/db
+      - ./keyauth:/data/keyauth
+    command: mongod --port 8017 --keyFile /data/keyauth --dbpath /data/db --replSet rs0 --bind_ip 0.0.0.0
+#    command: mongod --port 8017 --bind_ip 0.0.0.0
+    network_mode: host
